@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+
+```
+<link rel="stylesheet" href="style.css">
+
+<style>
+    .movie-details-page{
+        min-height:100vh;
+        background:#141414;
+        color:white;
+        padding-top:90px;
+    }
+
+    .movie-container{
+        max-width:1200px;
+        margin:auto;
+        padding:30px;
+    }
+
+    .movie-hero{
+        display:flex;
+        gap:40px;
+        flex-wrap:wrap;
+        align-items:flex-start;
+    }
+
+    .movie-poster{
+        width:320px;
+        border-radius:10px;
+        overflow:hidden;
+    }
+
+    .movie-poster img{
+        width:100%;
+        display:block;
+    }
+
+    .movie-info-details{
+        flex:1;
+        min-width:300px;
+    }
+
+    .movie-info-details h1{
+        margin-bottom:15px;
+        font-size:3rem;
+    }
+
+    .movie-meta-details{
+        display:flex;
+        gap:20px;
+        margin-bottom:20px;
+        color:#ccc;
+        flex-wrap:wrap;
+    }
+
+    .movie-overview{
+        line-height:1.8;
+        margin-bottom:25px;
+    }
+
+    .movie-buttons{
+        display:flex;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    .movie-buttons button{
+        padding:12px 20px;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+    }
+
+    #trailerBtn{
+        background:#e50914;
+        color:white;
+    }
+
+    #watchlistBtn{
+        background:#333;
+        color:white;
+    }
+
+    .back-btn{
+        display:inline-block;
+        margin-bottom:20px;
+        color:white;
+        text-decoration:none;
+        background:#333;
+        padding:10px 16px;
+        border-radius:5px;
+    }
+
+    .cast-section{
+        margin-top:50px;
+    }
+
+    .cast-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+        gap:20px;
+        margin-top:20px;
+    }
+
+    .cast-card{
+        background:#222;
+        border-radius:8px;
+        overflow:hidden;
+        text-align:center;
+    }
+
+    .cast-card img{
+        width:100%;
+        height:220px;
+        object-fit:cover;
+    }
+
+    .cast-card h4{
+        padding:10px;
+        font-size:.9rem;
+    }
+</style>
+```
+
+</head>
+<body>
+
+```
+<section class="movie-details-page">
+
+    <div class="movie-container">
+
+        <a href="index.html" class="back-btn">
+            ← Back to Home
+        </a>
+
+        <div class="movie-hero">
+
+            <div class="movie-poster">
+                <img
+                    id="moviePoster"
+                    src=""
+                    alt=""
+                >
+            </div>
+
+            <div class="movie-info-details">
+
+                <h1 id="movieTitle">
+                    Loading...
+                </h1>
+
+                <div class="movie-meta-details">
+
+                    <span id="movieRating">
+                        ⭐ 0
+                    </span>
+
+                    <span id="movieReleaseDate">
+                        Release Date
+                    </span>
+
+                    <span id="movieRuntime">
+                        Runtime
+                    </span>
+
+                </div>
+
+                <p
+                    class="movie-overview"
+                    id="movieOverview"
+                >
+                    Loading movie overview...
+                </p>
+
+                <div class="movie-buttons">
+
+                    <button id="trailerBtn">
+                        Watch Trailer
+                    </button>
+
+                    <button id="watchlistBtn">
+                        + Add To Watchlist
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="cast-section">
+
+            <h2>Cast</h2>
+
+            <div
+                class="cast-grid"
+                id="castGrid"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    const API_KEY = "YOUR_TMDB_API_KEY";
+
+    const BASE_URL =
+        "https://api.themoviedb.org/3";
+
+    const IMG_URL =
+        "https://image.tmdb.org/t/p/w500";
+
+    const movieId =
+        new URLSearchParams(
+            window.location.search
+        ).get("id");
+
+    let currentMovie = null;
+
+    async function loadMovieDetails() {
+
+        const response = await fetch(
+            `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
+        );
+
+        const movie =
+            await response.json();
+
+        currentMovie = movie;
+
+        document.getElementById(
+            "moviePoster"
+        ).src =
+            IMG_URL + movie.poster_path;
+
+        document.getElementById(
+            "movieTitle"
+        ).textContent =
+            movie.title;
+
+        document.getElementById(
+            "movieRating"
+        ).textContent =
+            `⭐ ${movie.vote_average}`;
+
+        document.getElementById(
+            "movieReleaseDate"
+        ).textContent =
+            movie.release_date;
+
+        document.getElementById(
+            "movieRuntime"
+        ).textContent =
+            `${movie.runtime} mins`;
+
+        document.getElementById(
+            "movieOverview"
+        ).textContent =
+            movie.overview;
+    }
+
+    async function loadCast() {
+
+        const response = await fetch(
+            `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
+        );
+
+        const data =
+            await response.json();
+
+        const castGrid =
+            document.getElementById(
+                "castGrid"
+            );
+
+        data.cast
+            .slice(0,8)
+            .forEach(actor => {
+
+                if(actor.profile_path){
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+                    card.classList.add(
+                        "cast-card"
+                    );
+
+                    card.innerHTML = `
+                        <img
+                            src="${IMG_URL + actor.profile_path}"
+                        >
+
+                        <h4>
+                            ${actor.name}
+                        </h4>
+                    `;
+
+                    castGrid.appendChild(
+                        card
+                    );
+                }
+            });
+    }
+
+    document
+        .getElementById(
+            "watchlistBtn"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                let watchlist =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "watchlist"
+                        )
+                    ) || [];
+
+                const exists =
+                    watchlist.find(
+                        item =>
+                        item.id === currentMovie.id
+                    );
+
+                if(!exists){
+
+                    watchlist.push(
+                        currentMovie
+                    );
+
+                    localStorage.setItem(
+                        "watchlist",
+                        JSON.stringify(
+                            watchlist
+                        )
+                    );
+
+                    alert(
+                        "Added To Watchlist"
+                    );
+                }
+            }
+        );
+
+    document
+        .getElementById(
+            "trailerBtn"
+        )
+        .addEventListener(
+            "click",
+            async () => {
+
+                const response =
+                    await fetch(
+                        `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
+                    );
+
+                const data =
+                    await response.json();
+
+                const trailer =
+                    data.results.find(
+                        video =>
+                        video.type === "Trailer"
+                    );
+
+                if(trailer){
+
+                    window.open(
+                        `https://www.youtube.com/watch?v=${trailer.key}`,
+                        "_blank"
+                    );
+
+                }else{
+
+                    alert(
+                        "Trailer Not Available"
+                    );
+                }
+            }
+        );
+
+    loadMovieDetails();
+    loadCast();
+
+</script>
+```
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist</title>
+
+```
+<link rel="stylesheet" href="style.css">
+
+<style>
+    .watchlist-page{
+        min-height:100vh;
+        background:#141414;
+        color:white;
+        padding-top:100px;
+    }
+
+    .watchlist-container{
+        width:90%;
+        max-width:1300px;
+        margin:auto;
+    }
+
+    .watchlist-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:30px;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .watchlist-header h1{
+        font-size:2.5rem;
+    }
+
+    .back-home{
+        text-decoration:none;
+        color:white;
+        background:#e50914;
+        padding:10px 18px;
+        border-radius:5px;
+    }
+
+    .watchlist-grid{
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fill,minmax(220px,1fr));
+        gap:25px;
+    }
+
+    .watchlist-card{
+        background:#1f1f1f;
+        border-radius:10px;
+        overflow:hidden;
+        transition:.3s;
+    }
+
+    .watchlist-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .watchlist-card img{
+        width:100%;
+        height:330px;
+        object-fit:cover;
+    }
+
+    .watchlist-info{
+        padding:15px;
+    }
+
+    .watchlist-info h3{
+        margin-bottom:10px;
+        font-size:1rem;
+    }
+
+    .watchlist-info p{
+        color:#ccc;
+        font-size:.9rem;
+        margin-bottom:10px;
+    }
+
+    .watchlist-actions{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .watchlist-actions button{
+        border:none;
+        padding:10px 12px;
+        border-radius:5px;
+        cursor:pointer;
+    }
+
+    .details-btn{
+        background:#e50914;
+        color:white;
+    }
+
+    .remove-btn{
+        background:#333;
+        color:white;
+    }
+
+    .empty-state{
+        text-align:center;
+        padding:80px 20px;
+        color:#aaa;
+    }
+
+    .empty-state h2{
+        margin-bottom:15px;
+    }
+
+    @media(max-width:768px){
+
+        .watchlist-header{
+            flex-direction:column;
+            align-items:flex-start;
+        }
+
+        .watchlist-header h1{
+            font-size:2rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+
+```
+<section class="watchlist-page">
+
+    <div class="watchlist-container">
+
+        <div class="watchlist-header">
+
+            <h1>🎬 My Watchlist</h1>
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                Back To Home
+            </a>
+
+        </div>
+
+        <div
+            class="watchlist-grid"
+            id="watchlistGrid"
+        >
+        </div>
+
+        <div
+            class="empty-state"
+            id="emptyState"
+            style="display:none;"
+        >
+
+            <h2>
+                No Movies Added Yet
+            </h2>
+
+            <p>
+                Start adding movies to your watchlist.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="watchlist.js"></script>
+```
+
+</body>
+</html>

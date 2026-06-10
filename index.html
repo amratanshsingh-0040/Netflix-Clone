@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone Advanced</title>
+
+```
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+```
+
+</head>
+<body>
+
+```
+<!-- Navbar -->
+<header class="navbar">
+    <div class="logo">
+        <h1>NETFLIX</h1>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+        <a href="#">New & Popular</a>
+        <a href="watchlist.html">My Watchlist</a>
+    </nav>
+
+    <div class="nav-right">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search movies..."
+        >
+        <button id="searchBtn">Search</button>
+    </div>
+</header>
+
+<!-- Hero Banner -->
+<section class="banner" id="banner">
+    <div class="banner-overlay">
+        <div class="banner-content">
+
+            <h1 id="bannerTitle">Loading...</h1>
+
+            <p id="bannerDescription">
+                Movie description will appear here.
+            </p>
+
+            <div class="banner-buttons">
+                <button class="play-btn">▶ Play</button>
+                <button class="info-btn">More Info</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Genre Filter -->
+<section class="genre-section">
+
+    <h2>Browse by Genre</h2>
+
+    <div class="genre-container">
+
+        <button class="genre-btn" data-genre="28">Action</button>
+        <button class="genre-btn" data-genre="35">Comedy</button>
+        <button class="genre-btn" data-genre="27">Horror</button>
+        <button class="genre-btn" data-genre="878">Sci-Fi</button>
+        <button class="genre-btn" data-genre="18">Drama</button>
+        <button class="genre-btn" data-genre="10749">Romance</button>
+
+    </div>
+
+</section>
+
+<!-- Loading Spinner -->
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+</div>
+
+<!-- Trending -->
+<section class="movie-section">
+
+    <div class="section-header">
+        <h2>Trending Now</h2>
+    </div>
+
+    <div class="movie-row" id="trendingMovies"></div>
+
+</section>
+
+<!-- Popular -->
+<section class="movie-section">
+
+    <div class="section-header">
+        <h2>Popular Movies</h2>
+    </div>
+
+    <div class="movie-row" id="popularMovies"></div>
+
+</section>
+
+<!-- Top Rated -->
+<section class="movie-section">
+
+    <div class="section-header">
+        <h2>Top Rated</h2>
+    </div>
+
+    <div class="movie-row" id="topRatedMovies"></div>
+
+</section>
+
+<!-- Upcoming -->
+<section class="movie-section">
+
+    <div class="section-header">
+        <h2>Upcoming Movies</h2>
+    </div>
+
+    <div class="movie-row" id="upcomingMovies"></div>
+
+</section>
+
+<!-- Search Results -->
+<section class="movie-section">
+
+    <div class="section-header">
+        <h2>Search Results</h2>
+    </div>
+
+    <div class="movie-grid" id="searchResults"></div>
+
+</section>
+
+<!-- Skeleton Loader -->
+<section class="skeleton-section" id="skeletonSection">
+
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+
+</section>
+
+<!-- Movie Details Modal -->
+<div class="modal" id="movieModal">
+
+    <div class="modal-content">
+
+        <span class="close-btn">&times;</span>
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Movie Banner"
+        >
+
+        <div class="modal-body">
+
+            <h2 id="modalTitle">
+                Movie Title
+            </h2>
+
+            <p id="modalOverview">
+                Movie overview appears here.
+            </p>
+
+            <div class="movie-meta">
+
+                <span id="movieRating">
+                    ⭐ 0.0
+                </span>
+
+                <span id="movieReleaseDate">
+                    Release Date
+                </span>
+
+            </div>
+
+            <div class="modal-buttons">
+
+                <button id="watchTrailerBtn">
+                    Watch Trailer
+                </button>
+
+                <button id="addWatchlistBtn">
+                    + Watchlist
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Infinite Scroll Loader -->
+<div class="bottom-loader" id="bottomLoader">
+    Loading More Movies...
+</div>
+
+<!-- Footer -->
+<footer>
+
+    <div class="footer-content">
+
+        <h3>Netflix Clone</h3>
+
+        <p>
+            Built using HTML, CSS, JavaScript and TMDB API.
+        </p>
+
+        <p>
+            © 2026 All Rights Reserved
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
